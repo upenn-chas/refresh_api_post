@@ -1,0 +1,49 @@
+<?php
+use Drupal\Core\Routing\RouteMatchInterface;
+/**
+ * @file
+ * Refresh API POST Module for Drupal Sites.
+ */
+
+/**
+* Implements hook_help().
+*/
+
+function refresh_api_post_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.refresh_api_post':
+      return t('<p>The Refresh API Post module provides a Rules action for posting to a REST API.</p>
+      <p>Visit the <a href=":project_page">project page on Drupal.org</a> for more details.</p>',
+        [
+          ':project_page' => 'https://www.drupal.org/project/refresh_api_post',
+        ]);
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function refresh_api_post_theme() {
+  return [
+    // Register the theme hook suggestion, which allows to provide custom Twig
+    // template for the node create/edit form a module.
+    'node_edit__item_loan_request' => [
+      'render element' => 'form',
+      'base hook' => 'node_edit',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function refresh_api_post_form_alter(&$form, $form_state, $form_id) {
+$user = \Drupal::currentUser()->getRoles();
+  if (!in_array("administrator", $user) && $form_id == "node_item_loan_request_edit_form") {
+    $form['field_email_contact']['#access'] = FALSE;
+  }
+  
+  if ($form_id == 'node_item_loan_request_form') {
+    $form['#title'] = t('Request Equipment Loan');
+  }
+}
