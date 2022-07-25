@@ -45,5 +45,11 @@ $user = \Drupal::currentUser()->getRoles();
   
   if ($form_id == 'node_item_loan_request_form') {
     $form['#title'] = t('Request Equipment Loan');
+    $form['actions']['submit']['#value'] = t('Submit Equipment Request');
   }
+
+  if ($form_id == 'node_item_loan_request_edit_form') {
+    $form['actions']['submit']['#value'] = t('Update Equipment Loan Reservation');
+  }
+
 }
