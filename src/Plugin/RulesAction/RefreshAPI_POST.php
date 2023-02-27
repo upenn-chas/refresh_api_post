@@ -14,7 +14,7 @@ use GuzzleHttp\Exception\RequestException;
  *
  * @RulesAction(
  *   id = "RefreshAPI_POST",
- *   label = @Translation("Refrest API POST"),
+ *   label = @Translation("Refresh API POST"),
  *   category = @Translation("Data"),
  *   context_definitions = {
  *     "url" = @ContextDefinition("string",
